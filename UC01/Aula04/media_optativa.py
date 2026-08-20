@@ -21,7 +21,7 @@ match resp:
         media = 0
         print(f"Resposta inválida, você Digitou {resp}, digite apenas : s ou n") 
 
-if media == 0:
+if media == 0: #NÃO É BOM INSERIR 0 AO VALOR POIS PODE TRAZER OUTROS PROBLEMAS QUE DEVERÃO SER TRATADOS;
     print("\nvolte e digite novamente")
 else:
     if media > 6.0:
@@ -33,6 +33,7 @@ else:
  #---------------- AQUI ENCERRA O QUE FOI PEDIDO -------------------------
  '''
 #codigo media_com_optativa_Ver1.1 
+#VERSÃO QUE INSERE O OBJETO NONE (AUSÊNCIA DE VALOR) PARA MELHORAR A GRAFIA 
 nome = input("Digite eu nome: ") 
 nota1 = float(input("Digite sua primeira nota: ")) 
 nota2 = float(input("Digite sua segunda nota: ")) 
@@ -57,10 +58,10 @@ if media is None:
 else:
     if media > 6.0:
         print(f"\n {nome} ,suas notas são: {nota1,nota2}") 
-        print(f"\ne sua média foi de {media}, portanto você está de APROVADO!") 
+        print(f"\ne sua média foi de {media}, portanto você está de APROVADO!\n") 
     elif media >= 3.0 and media <= 6.0: 
         print(f"\n {nome} ,suas notas são: {nota1,nota2}") 
-        print(f"\ne sua média foi de {media}, portanto você está de RECUPERAÇÃO!") 
+        print(f"\ne sua média foi de {media}, portanto você está de RECUPERAÇÃO!\n") 
     else: 
         print(f"\n {nome} ,suas notas são: {nota1,nota2}") 
         print(f"\ne sua média foi de {media}, portanto você está de REPROVADO!\n")

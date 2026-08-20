@@ -27,9 +27,6 @@ match cod_prod:
 #codigo origem_produto_python_Ver1.1 
 cod_prod = int(input("Digite o código do produto (de 1 a 11): "))
 
-#verifica o codigo do produto:  
-cod_prod = int(input("Digite o código do produto: ")) 
-
 match cod_prod: #POSSO DEFINIR VARIAVEL DENTRO DA ESTRUTURA 
     case 1:
         regiao = "SUL"

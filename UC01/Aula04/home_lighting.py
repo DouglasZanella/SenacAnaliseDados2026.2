@@ -34,8 +34,6 @@ Comprimento = float(input("\nDigite o Comprimento do ambiente(em metros):"))
 
 Potencia_lamp = float(input("\nDigite a potência de suas lâmpadas (em Watts): "))
 
- 
-
 #calcular a área:  
 
 Area_comodo = (Largura * Comprimento)  
@@ -66,7 +64,7 @@ else:
 
     print("================================================================================")
 
-    print("\n O Ambiente não poderá ser totalmente iluminado")
+    print("\nO Ambiente não poderá ser totalmente iluminado")
 
     print(f"\npois necessita de {Qtd_final:.0f} Lâmpadas de {Potencia_lamp} Watts")
 
@@ -74,4 +72,4 @@ else:
 
     print(f"\nRecomenda-se adiquirir lâmpadas com potência maior do que {(Area_comodo*3) / Potencia_lamp} Watts")
 
-    print("================================================================================")
+    print("================================================================================\n")

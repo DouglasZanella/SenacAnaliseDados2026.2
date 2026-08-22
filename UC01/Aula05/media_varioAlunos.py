@@ -1,5 +1,5 @@
-#codigo media_variosAlunos_python_Ver1.1 
-#ERROR_FIX 
+# #codigo media_variosAlunos_python_Ver1.1 
+# #ERROR_FIX 
 
 seunome = input("Digite eu nome: ") 
 cont_alunos = int(input("\nQuantos alunos quer registrar? ")) 
@@ -40,3 +40,8 @@ for i in range(cont_alunos):
         print(f"\nAluno: {nome_aluno}")
         print(f"Média: {media:.2f}")
         print(f"Situação: {Result_final}")
+#--------------------------------------------------------------------------------------------------
+# 
+# codigo media_variosAlunos_python_Ver1.2
+#ALTER_VERSION 
+

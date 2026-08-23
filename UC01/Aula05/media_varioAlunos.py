@@ -41,7 +41,3 @@ for i in range(cont_alunos):
         print(f"Média: {media:.2f}")
         print(f"Situação: {Result_final}")
 #--------------------------------------------------------------------------------------------------
-# 
-# codigo media_variosAlunos_python_Ver1.2
-#ALTER_VERSION 
-

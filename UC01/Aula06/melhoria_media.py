@@ -41,11 +41,16 @@ for i in range(cont_alunos):
             Result_final = "REPROVADO!" 
             Lista_alunos.append(f"Aluno{i+1}: {Nome_aluno} - {Result_final}") 
 
+print("-----------ALUNOS CADASTRADOS: ---------------------")
 print("\nA listagem dos aunos é:") 
 for aluno in Lista_alunos: 
     print(aluno)
-#MOSTRA APENAS OS ALUNOS APROVADOS
+    print("\n")
 
-# for aluno in Lista_alunos: 
-#     if "APROVADO" in aluno: #só vai imprimir os ALUNOS APROVADOS
-#         print(aluno)
+#MOSTRA APENAS OS ALUNOS APROVADOS:::::
+print("\n-------------APROVADOS APENAS--------------\n")
+for aluno in Lista_alunos: 
+    if "APROVADO" in aluno: #só vai imprimir os ALUNOS APROVADOS
+        print(aluno)
+
+print("----------------------FIM---------------------")      

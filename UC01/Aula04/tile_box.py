@@ -7,17 +7,13 @@ janelas). Cada caixa de azulejos possui 1,5 m²
 '''
 #codigo tile_box_python_Ver1.0 
 altura = float(input("Digite a altura das paredes (em metros): "))
-
 largura = float(input("Digite a largura da parede menor (em metros): ")) 
-
 comprimento = float(input("\nDigite o Comprimento da parede Maior(em metros):"))
 
 #calcular a área:  
-
 Area_total= ((altura*largura)*2) + ((altura*comprimento)*2) 
 
 #calculo da quantidade de caixas 
-
 Qtd_caixas = Area_total / 1.5  
 
 #print("\n A quantidade de caixas de azulejo necessárias para revestir todas as paredes é de  :") 

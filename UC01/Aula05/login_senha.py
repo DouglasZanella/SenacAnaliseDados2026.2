@@ -13,6 +13,8 @@
 #         print(f"\nVocê só possui mais {3 - (cont+1)} tentativas!\n") 
 #     cont =+ 1´
 
+#codigo_login_senha_python_ver1.2 
+#SECURITY_FIX 
 #USANDO O FOR NO CADASTRO LOGIN/SENHA POR QUESTÕES DE SEGURANÇA 
  
 for tentativas in range(3):

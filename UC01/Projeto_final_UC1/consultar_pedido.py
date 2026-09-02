@@ -1,66 +1,93 @@
-# função consultar_pedido_python_ver1.2()
+# função consultar_pedido_python_ver1.3()
 # foram feitos melhorias nessa versão
 
 '''
-para funcionar vou precisar importar funções externas, por exemplo:
-from adicionar_pedido import adicionar_pedido
+#para funcionar vou precisar importar funções externas, por exemplo:
+from adicionar_item_pedido import adicionar_item_pedido
 from remover_pedido import remover_pedido
 from cancelar_pedido import cancelar_pedido
 '''
 # criação de uma lista "falsa" para testes:::::
 # ----------------------------------------------BLOCO DE TESTES------------------------------------
-lista_pedidos = [
-    {
-        "numero_pedido": 20,
-        "mesa": 4,
-        "status": "PREPARANDO",
-        "pagamento": "PENDENTE",
-        "garcom": "José",
-        "valor_total": 105.98
-    },
-    {
-        "numero_pedido": 21,
-        "mesa": 7,
-        "status": "PRONTO",
-        "pagamento": "PENDENTE",
-        "garcom": "Cleiton",
-        "valor_total": 75.90
-    },
-    {
-        "numero_pedido": 22,
-        "mesa": 14,
-        "status": "ABERTO",
-        "pagamento": "PENDENTE",
-        "garcom": "José",
-        "valor_total": 123.50
-    }
-]
+# pedidos = [
+#     {
+#         "numero_pedido": 1,
+#         "numero_da_mesa": 2,
+#         "itens": "Sushi",
+#         "quantidade": 8,
+#         "status": "ABERTO",
+#         "garcom": "Carlos",
+#         "observacoes": "Sem wasabi",
+#         "tipo_pagamento": "Débito",
+#     },
+#     {
+#         "numero_pedido": 2,
+#         "numero_da_mesa": 5,
+#         "itens": "Temaki Salmão",
+#         "quantidade": 3,
+#         "status": "PREPARANDO",
+#         "garcom": "Fernanda",
+#         "observacoes": "Adicionar molho tarê",
+#         "tipo_pagamento": "Débito",
+#     },
+#     {
+#         "numero_pedido": 3,
+#         "numero_da_mesa": 8,
+#         "itens": "Combo Sushi Premium",
+#         "quantidade": 1,
+#         "status": "PRONTO",
+#         "garcom": "Roberto",
+#         "observacoes": "",
+#         "tipo_pagamento": "Crédito",
+#     },
+#     {
+#         "numero_pedido": 4,
+#         "numero_da_mesa": 11,
+#         "itens": "Hot Roll",
+#         "quantidade": 12,
+#         "status": "ENTREGUE",
+#         "garcom": "Juliana",
+#         "observacoes": "Cliente pediu guardanapos extras",
+#         "tipo_pagamento": "PIX",
+#     },
+#     {
+#         "numero_pedido": 5,
+#         "numero_da_mesa": 14,
+#         "itens": "Yakisoba de Frango",
+#         "quantidade": 2,
+#         "status": "PAGO",
+#         "garcom": "Marcos",
+#         "observacoes": "dobro de shoyu",
+#         "tipo_pagamento": "VR-Refeição",
+#     }
+# ]
 
-# Funções para testes
 
-def remover_item(pedido):
-    print(
-        f"\nUm item seria removido do "
-        f"pedido nº {pedido['numero_pedido']}."
-    )
+# # Funções para testes
 
-def adicionar_item(pedido):
-    print(
-        f"\nUm item seria adicionado ao "
-        f"pedido nº {pedido['numero_pedido']}."
-    )
+# def remover_item(pedido):
+#     print(
+#         f"\nUm item seria removido do "
+#         f"pedido nº {pedido['numero_pedido']}."
+#     )
 
-def cancelar_pedido(pedido):
-    pedido["status"] = "CANCELADO"
+# def adicionar_item_pedido(pedido):
+#     print(
+#         f"\nUm item seria adicionado ao "
+#         f"pedido nº {pedido['numero_pedido']}."
+#     )
 
-    print(
-        f"\nO pedido nº {pedido['numero_pedido']} "
-        "foi cancelado."
-    )
+# def cancelar_pedido(pedido):
+#     pedido["status"] = "CANCELADO"
+
+#     print(
+#         f"\nO pedido nº {pedido['numero_pedido']} "
+#         "foi cancelado."
+#     )
 # --------------------------------------FIM DO BLOCO DE TESTES --------------------------------------------------
 
 
-def procurar_pedido(numero_digitado, lista_pedidos):
+def procurar_pedido(numero_digitado, pedidos):
     '''
     FUNÇÃO AUXILIAR
      Função que procura o pedido dentro da lista de pedido
@@ -70,32 +97,49 @@ def procurar_pedido(numero_digitado, lista_pedidos):
     retornará que o pedido não existe, se encontrar um pedido equivalente ao número registrado,
     retornará o pedido
    '''
-    for pedido in lista_pedidos:  # ercorre a lista em busca do pedido numero_pedido é o numero que foi associado lá na criação
+    for pedido in pedidos:  # ercorre a lista em busca do pedido numero_pedido é o numero que foi associado lá na criação
         if pedido["numero_pedido"] == numero_digitado:# retorna os dados equivalente a este pedido
             return pedido
     
     return None # aqui caso não encontre ele precisa retornar uma "resposta" negativa (no caso vazia)
 
-
 def mostrar_pedido(pedido):
     '''
-    FUNÇÃO AUXILIAR
-    Mostra os dados do pedido encontrado.
+    FUNÇÃO AUXILIAR:
+    serve apenas para separar o que vai ser apresentado com a consulta
+    tanto para o cliente quanto para o garçom
     '''
-    valor_formatado = f"{pedido['valor_total']:.2f}"
+    print("\n=============== VISÃO DO CLIENTE ====================")
+    print(f"PEDIDO Nº {pedido.get('numero_pedido')}")
+    print(f"Garçom: {pedido.get('garcom', 'Não informado')}")
+    print(f"Itens: {pedido.get('itens', 'Não informado')} x {pedido.get('quantidade', 'Não informado')}") #inclusão
+    print(f"Status: {pedido.get('status', 'Não informado')}")
 
-    print("\n====================================")
-    print(f"PEDIDO Nº {pedido['numero_pedido']}")
+    '''
+    dessa vez optei por uso do .get por uma causa: 
+    quando me foi apresentado alguns erros quando quando fiz testes em versões anteriores
+    aparecia um erro pois tinha malgumas chaves com erros de digitação, entao uma vez 
+    que nao era encontrada a chave me retornava esse erro. o ".get" garante que o programa continue caoe nao ache a chave
+    '''
+
+    print("\n=============== VISÃO DO GARÇOM ====================")
+    print(f"PEDIDO Nº {pedido.get('numero_pedido')}")
+    print(f"Mesa: {pedido.get('numero_da_mesa', 'Não informado')}") 
+    print(f"Garçom: {pedido.get('garcom', 'Não informado')}")
+    print(f"Itens: {pedido.get('itens', 'Não informado')} x {pedido.get('quantidade', 'Não informado')}") #inclusão
+    print(f"Observações: {pedido.get('observacoes', 'Não informado')}") #inclusão
+    print(f"Status: {pedido.get('status', 'Não informado')}") #inclusão
+    print(f"Pagamento: {pedido.get('tipo_pagamento', 'Não informado')}") #inclusão
+    
+    valor = pedido.get("valor_total")
+
+    if valor is not None:
+        print(f"\nValor total: R$ {valor:.2f}")
+
     print("====================================")
-    print(f"Mesa: {pedido['mesa']}")
-    print(f"Garçom: {pedido['garcom']}")
-    print(f"Status: {pedido['status']}")
-    print(f"Pagamento: {pedido['pagamento']}")
-    print(f"\nValor total: R$ {valor_formatado}")
-    print("====================================")
 
 
-def consultar_pedido(lista_pedidos):
+def consultar_pedido(pedidos):
     '''
     Função principal da consulta.
     executa as duas funções auxiliares:
@@ -103,7 +147,7 @@ def consultar_pedido(lista_pedidos):
     Retorna o pedido encontrado ou None.
     '''
 
-    if len(lista_pedidos) == 0:  # verificar se tem algum pedido na lista
+    if len(pedidos) == 0:  # verificar se tem algum pedido na lista
         print("\nNão existem pedidos cadastrados.")
         return None
 
@@ -120,7 +164,7 @@ def consultar_pedido(lista_pedidos):
             armazena dentro da variavel pedido_encontrado
             '''
             numero_digitado = int(input("\nDigite o número do pedido que deseja consultar: "))
-            pedido_encontrado = procurar_pedido(numero_digitado,lista_pedidos)
+            pedido_encontrado = procurar_pedido(numero_digitado,pedidos)
 
             if pedido_encontrado is None:# se não tiver nada na lista ou não encontrar o nº de pedido,ele ainda vai estar como None
                 print(
@@ -157,7 +201,7 @@ def consultar_pedido(lista_pedidos):
 
         match opcao: # aqui entra a ligação com as demais funções
             case "1":
-                adicionar_item(pedido_encontrado)
+                adicionar_item_pedido(pedido_encontrado)
             case "2":
                 remover_item(pedido_encontrado)
             case "3":
@@ -172,6 +216,10 @@ def consultar_pedido(lista_pedidos):
         print("\nPedido Inexistente") #se não tem um pedido diferente de None significa que não tem pedidos com essa numeração variável pedido_encontrado ainda possui valor "vazio"
     return pedido_encontrado
 
+'''
+Lembrando que cada função vai depender da syntaxe do outro golega de turma
+deverá ser ajustado para o nome que ele definir.
+'''
 
 # CHAMAR A FUNÇÃO PARA TESTAR:::
-consultar_pedido(lista_pedidos)
+consultar_pedido(pedidos)

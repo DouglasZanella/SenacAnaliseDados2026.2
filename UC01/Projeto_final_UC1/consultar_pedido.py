@@ -9,81 +9,81 @@ from cancelar_pedido import cancelar_pedido
 '''
 # criação de uma lista "falsa" para testes:::::
 # ----------------------------------------------BLOCO DE TESTES------------------------------------
-# pedidos = [
-#     {
-#         "numero_pedido": 1,
-#         "numero_da_mesa": 2,
-#         "itens": "Sushi",
-#         "quantidade": 8,
-#         "status": "ABERTO",
-#         "garcom": "Carlos",
-#         "observacoes": "Sem wasabi",
-#         "tipo_pagamento": "Débito",
-#     },
-#     {
-#         "numero_pedido": 2,
-#         "numero_da_mesa": 5,
-#         "itens": "Temaki Salmão",
-#         "quantidade": 3,
-#         "status": "PREPARANDO",
-#         "garcom": "Fernanda",
-#         "observacoes": "Adicionar molho tarê",
-#         "tipo_pagamento": "Débito",
-#     },
-#     {
-#         "numero_pedido": 3,
-#         "numero_da_mesa": 8,
-#         "itens": "Combo Sushi Premium",
-#         "quantidade": 1,
-#         "status": "PRONTO",
-#         "garcom": "Roberto",
-#         "observacoes": "",
-#         "tipo_pagamento": "Crédito",
-#     },
-#     {
-#         "numero_pedido": 4,
-#         "numero_da_mesa": 11,
-#         "itens": "Hot Roll",
-#         "quantidade": 12,
-#         "status": "ENTREGUE",
-#         "garcom": "Juliana",
-#         "observacoes": "Cliente pediu guardanapos extras",
-#         "tipo_pagamento": "PIX",
-#     },
-#     {
-#         "numero_pedido": 5,
-#         "numero_da_mesa": 14,
-#         "itens": "Yakisoba de Frango",
-#         "quantidade": 2,
-#         "status": "PAGO",
-#         "garcom": "Marcos",
-#         "observacoes": "dobro de shoyu",
-#         "tipo_pagamento": "VR-Refeição",
-#     }
-# ]
+pedidos = [
+    {
+        "numero_pedido": 1,
+        "numero_da_mesa": 2,
+        "itens": "Sushi",
+        "quantidade": 8,
+        "status": "ABERTO",
+        "garcom": "Carlos",
+        "observacoes": "Sem wasabi",
+        "tipo_pagamento": "Débito",
+    },
+    {
+        "numero_pedido": 2,
+        "numero_da_mesa": 5,
+        "itens": "Temaki Salmão",
+        "quantidade": 3,
+        "status": "PREPARANDO",
+        "garcom": "Fernanda",
+        "observacoes": "Adicionar molho tarê",
+        "tipo_pagamento": "Débito",
+    },
+    {
+        "numero_pedido": 3,
+        "numero_da_mesa": 8,
+        "itens": "Combo Sushi Premium",
+        "quantidade": 1,
+        "status": "PRONTO",
+        "garcom": "Roberto",
+        "observacoes": "",
+        "tipo_pagamento": "Crédito",
+    },
+    {
+        "numero_pedido": 4,
+        "numero_da_mesa": 11,
+        "itens": "Hot Roll",
+        "quantidade": 12,
+        "status": "ENTREGUE",
+        "garcom": "Juliana",
+        "observacoes": "Cliente pediu guardanapos extras",
+        "tipo_pagamento": "PIX",
+    },
+    {
+        "numero_pedido": 5,
+        "numero_da_mesa": 14,
+        "itens": "Yakisoba de Frango",
+        "quantidade": 2,
+        "status": "PAGO",
+        "garcom": "Marcos",
+        "observacoes": "dobro de shoyu",
+        "tipo_pagamento": "VR-Refeição",
+    }
+]
 
 
-# # Funções para testes
+# Funções para testes
 
-# def remover_item(pedido):
-#     print(
-#         f"\nUm item seria removido do "
-#         f"pedido nº {pedido['numero_pedido']}."
-#     )
+def remover_item(pedido):
+    print(
+        f"\nUm item seria removido do "
+        f"pedido nº {pedido['numero_pedido']}."
+    )
 
-# def adicionar_item_pedido(pedido):
-#     print(
-#         f"\nUm item seria adicionado ao "
-#         f"pedido nº {pedido['numero_pedido']}."
-#     )
+def adicionar_item_pedido(pedido):
+    print(
+        f"\nUm item seria adicionado ao "
+        f"pedido nº {pedido['numero_pedido']}."
+    )
 
-# def cancelar_pedido(pedido):
-#     pedido["status"] = "CANCELADO"
+def cancelar_pedido(pedido):
+    pedido["status"] = "CANCELADO"
 
-#     print(
-#         f"\nO pedido nº {pedido['numero_pedido']} "
-#         "foi cancelado."
-#     )
+    print(
+        f"\nO pedido nº {pedido['numero_pedido']} "
+        "foi cancelado."
+    )
 # --------------------------------------FIM DO BLOCO DE TESTES --------------------------------------------------
 
 

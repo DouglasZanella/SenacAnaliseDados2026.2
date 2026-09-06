@@ -17,14 +17,25 @@
 from convert_c_f import celcius_fahrenheit
 from convert_f_c import fahrenheit_celcius
 
-def conversor(escolha, temp_digitada):
-    if escolha == 1: 
-        temp_digitada = float(input("Digite o valor a ser convertido:\n")) 
-        resultado = celcius_fahrenheit(temp_digitada) 
-        return resultado 
-    elif escolha == 2: 
-        temp_digitada = float(input("Digite o valor a ser convertido:\n")) 
-        resultado = fahrenheit_celcius(temp_digitada)
-        return resultado
-    else: 
-        print("\nOpção não encontrada!\n")
+def conversor(escolha):
+    """
+    função principal que chama as outras duas funções de acordo com a escolha do usuário
+    interage com o usuário 
+    """
+    try:
+        if escolha == 1: 
+            temp_digitada = float(input("Digite o valor em Celcius:\n")) 
+            resultado = celcius_fahrenheit(temp_digitada) 
+            return resultado 
+        elif escolha == 2: 
+            temp_digitada = float(input("Digite o valor em fahrenheit:\n")) 
+            resultado = fahrenheit_celcius(temp_digitada)
+            return resultado
+        else: 
+            print("\nOpção não encontrada!\n")
+            return None
+    except TypeError:
+        print(
+            "Entrada inválida!"
+        "\n Digite novamente:"
+        )

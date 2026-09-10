@@ -1,6 +1,5 @@
 #CÓDIGOS DESENVOLVIDOS EM AULA 
 
-
 import pandas as pd # alias 'pd'
 import numpy as np # alias 'np'
 '''
@@ -43,22 +42,4 @@ serie2_impares = pd.Series(
     
 print(serie2_impares)
 
-
-
-# pedidos = [
-#     pedido1 {  #aqui seria a coluno
-#         "numero":12, #aqui seria a linha
-#         'mesa':2
-#         'valor': 12.32
-#         }
-#          pedido2 {  
-#         "numero":15, 
-#         'mesa':4
-#         'valor': 27.99
-#         }
-#     pedido2 {  
-#         "numero":13, 
-#         'mesa':7
-#         'valor': 15.45
-#         }
-# ]
+#fINALIZADO AQUI A AULA 11

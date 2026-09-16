@@ -4,40 +4,73 @@
 import pandas as pd
 
 
-transacao_invest = pd.read_excel("base_invest.xlsx", sheet_name="Transacoes")#lê a planilha e pega apenas as transações
-ativo_invest = pd.read_excel("base_invest.xlsx", sheet_name="Ativo")
+df_transacao = pd.read_excel("base_invest.xlsx", sheet_name="Transacoes")#lê a planilha e pega apenas as transações
+print(df_transacao)
 
-print(transacao_invest)
-compras_invest = transacao_invest.query("operacao == 'compra'")
-vendas_invest = transacao_invest.query("operacao == 'venda'")
-transacao_invest['qtd_invest'] = transacao_invest['quantidade'] * transacao_invest['preco']
-print(qtd_invest)
+'''
+Pergunta 1:
+●  Quais são as máximas e mínimas de operação de compra e venda das transações? 
+'''
 
-valor_por_ativo = transacao_invest.groupby("id_ativo")['valor_total'].sum()
+df_compras = df_transacao.query("operacao == 'compra'")#separa as ações de compra
+df_vendas = df_transacao.query("operacao == 'venda'")#separa as ações de venda
 
-print(qtd_invest)
+maior_compra = df_compras['preco'].max()#retorna o maior valor de compra
+menor_compra = df_compras['preco'].min()#retorna o menor valor de compra
 
-max_compra_invest = compras_invest['preco'].max()
-min_compra_invest = compras_invest['preco'].min()
-
-max_venda_invest = vendas_invest['preco'].max()
-min_venda_invest = vendas_invest['preco'].min()
+maior_vendas = df_vendas['preco'].max()#retorna o maior valor de Venda
+menor_vendas = df_vendas['preco'].min()#retorna o menor valor de Venda
 
 
 print("=" * 20, "COMPRAS", "="*20)
-print(compras_invest)
+print(f"\n o Maior valor de compra foi de:\n {maior_compra:.2f}")
+print(f"\n o Menor valor de compra foi de:\n {menor_compra:.2f}")
 
 print("=" * 20, "VENDAS", "="*20)
-print(vendas_invest)
+print(f"\n o Maior valor de Vendas foi de:\n {maior_vendas:.2f}")
+print(f"\n o Menor valor de Vendas foi de:\n {menor_vendas:.2f}")
 
-print("=" * 20, "VALOR MÁXIMO DE COMPRA", "="*20)
-print(f"\n o Maior valor de compra foi de:\n {max_compra_invest:.2f}")
+'''
+Pergunta 2: 
+●  Qual CNPJ tem o ativo de maior valor? 
+'''
+#Leio a aba de ativos
+df_ativo = pd.read_excel("base_invest.xlsx", sheet_name="Ativo")
 
-print("=" * 20, "VALOR MÍNIMO DE COMPRA", "="*20)
-print(f"\n o Menor valor de compra foi de:\n {min_compra_invest:.2f}")
+#para saber qual o maior ativo, preciso calcular a quantidade do ativo*o valor deles para achar o maior preço 
+df_transacao['valor_total'] = (df_transacao['quantidade'] * df_transacao['preco']) #cria a coluna com o total de cada transação
+print("=" * 20, "TOTAL POR TRANSAÇÃO", "="*20)
+print(df_transacao['valor_total'])
 
-print("=" * 20, "VALOR MÁXIMO DE VENDA", "="*20)
-print(f"\n o Maior valor de compra foi de:\n {max_venda_invest:.2f}")
+#separo os valores por cada um dos Ativos
+valor_por_ativo = df_transacao.groupby("id_ativo")['valor_total'].sum() #soma o total de transações por cada ID do Ativo (coluna Id_Ativo)
+print("=" * 20, "TOTAL DE CADA ATIVO", "="*20)
+print(valor_por_ativo)
 
-print("=" * 20, "VALOR MÍNIMO DE VENDA", "="*20)
-print(f"\n o Menor valor de compra foi de:\n {min_venda_invest:.2f}")
+#Verifico qual dos ativos tem maior valor e salvo o ID 
+'''
+originalmente eu escrevi:
+indice_maior_preco = df_transacao['preco'].idxmax()
+e aqui ele ta verificando o dado errado.
+'''
+indice_maior_preco = df_transacao['valor_total'].idxmax()#PROCURAR PELO INDICE DO VALOR TOTAL 
+#com esse dado eu procuro a linha que tem o maior preco
+linha_maior_preco = df_transacao.loc[indice_maior_preco]
+#com esse dado verifico o id do ativo que está na linha com maior aitvo:
+id_ativo_maior_valor = linha_maior_preco['id_ativo']
+#com tudo isso agora eu consigo chegar no ID do maior ativo e comparar na aba de ativo qual o CNPJ que está relacionado com essa linha: 
+linha_maior_ativo = df_ativo[df_ativo['id_ativo'] == id_ativo_maior_valor]
+cnpj_id_ativo_maior_valor = linha_maior_ativo.iloc[0]['cnpj']
+
+print("=" * 20, "ATIVO DE MAIOR VALOR", "="*20)
+print(f"ID do ativo: {id_ativo_maior_valor}")
+print(f"CNPJ: {cnpj_id_ativo_maior_valor}")
+
+
+'''
+Pergunta 3:
+●  Qual valor total em transações de cada participante?
+'''
+valor_por_participante = df_transacao.groupby('id_participante')["valor_total"].sum() #Soma o total de transações por cada participante
+print("=" * 20, "TOTAL POR PARTICPANTE", "="*20)
+print(valor_por_participante)

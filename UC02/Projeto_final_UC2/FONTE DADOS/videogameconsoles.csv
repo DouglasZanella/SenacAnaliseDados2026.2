@@ -1,0 +1,51 @@
+ID,ConsoleName,Manufacturer,Year,Generation
+1,Magnavox Odyssey,Magnavox,1972,First
+2,Epoch TV Tennis,Epoch,1975,First
+3,Home Pong,Atari,1975,First
+4,Coleco Telstar,Coleco,1976,First
+5,Color TV-Game,Nintendo,1977,First
+6,Fairchild Channel F,Fairchild,1976,Second
+7,Atari 2600,Atari,1977,Second
+8,Magnavox Odyssey 2,Magnavox,1978,Second
+9,Microvision,Milton Bradley,1979,Second
+10,Intellivision,Mattel,1980,Second
+11,Game and Watch,Nintendo,1980,Second
+12,Atari 5200,Atari,1982,Second
+13,ColecoVision,Coleco,1982,Second
+14,SG-1000,Sega,1983,Third
+15,Nintendo Entertainment System,Nintendo,1983,Third
+16,Sega Master System,Sega,1985,Third
+17,Atari 7800,Atari,1986,Third
+18,TurboGrafx-16,NEC,1987,Fourth
+19,Sega Genesis,Sega,1988,Fourth
+20,Game Boy,Nintendo,1989,Fourth
+21,Atari Lynx,Atari,1989,Fourth
+22,Neo Geo,SNK,1990,Fourth
+23,Super Nintendo Entertainment System,Nintendo,1990,Fourth
+24,Sega Game Gear,Sega,1990,Fourth
+25,TurboExpress,NEC,1990,Fourth
+26,Philips CD-i,Philips,1991,Fourth
+27,3DO Interactive Multiplayer,Panasonic,1993,Fifth
+28,Atari Jaguar,Atari,1993,Fifth
+29,PlayStation,Sony,1994,Fifth
+30,Sega Saturn,Sega,1994,Fifth
+31,Virtual Boy,Nintendo,1995,Fifth
+32,Sega Nomad,Sega,1995,Fifth
+33,Nintendo 64,Nintendo,1996,Fifth
+34,Game Boy Pocket,Nintendo,1996,Fifth
+35,Game Boy Color,Nintendo,1998,Fifth
+36,Neo Geo Pocket,SNK,1998,Fifth
+37,WonderSwan,Bandai,1999,Fifth
+38,Neo Geo Pocket Color,SNK,1999,Fifth
+39,Sega Dreamcast,Sega,1998,Sixth
+40,WonderSwan Color,Bandai,2000,Sixth
+41,PlayStation 2,Sony,2000,Sixth
+42,Game Boy Advance,Nintendo,2001,Sixth
+43,Nintendo GameCube,Nintendo,2001,Sixth
+44,Xbox,Microsoft,2001,Sixth
+45,GP32,Game Park,2001,Sixth
+46,Nokia N-Gage,Nokia,2003,Sixth
+47,Game Boy Advance SP,Nintendo,2003,Sixth
+48,Game Boy Micro,Nintendo,2005,Sixth
+49,Nintendo DS,Nintendo,2004,Seventh
+50,PlayStation Portable,Sony,2004,Seventh

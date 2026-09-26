@@ -31,8 +31,12 @@ CREATE TABLE consoles(
     Generation VARCHAR(10)
 );
 
+SET GLOBAL local_infile = 1; -- marcação de aceite para arquivos locais (passo extra 01 junto ao load data)
+
+-- 'OPT_LOCAL_INFILE=1' -- (passo extra 02 junto ao load data) inserir na sua conexão local (edit da conexão >> Advanced >> Others)
+
 -- INJETANDO OS DADOS EM CADA TABELA - BASE DE VENDAS DOS JOGOS:
-LOAD DATA LOCAL INFILE 'C:\Users\douglas.zanella\Documents\BIGDATA\SenacAnaliseDados2026.2\UC02\Projeto_final_UC2\Fonte_Dados_tratados\df_vgsales2024_tratado.csv' -- Ajuste o caminho no seu banco local
+LOAD DATA LOCAL INFILE 'C:\\Users\\douglas.zanella\\Documents\\BIGDATA2026\\SenacAnaliseDados2026.2\\UC02\\Projeto_final_UC2\\Fonte_Dados_tratados\\df_vgsales2024_tratado.csv' -- Ajuste o caminho no seu banco local
 INTO TABLE video_games_sales_2024
 FIELDS TERMINATED BY ',' 
 ENCLOSED BY '"'
@@ -46,4 +50,21 @@ SET jp_sales = REPLACE(@jp_sales, '.', '.'); -- Garante que o decimal seja lido 
 SET pal_sales = REPLACE(@pal_sales, '.', '.'); -- Garante que o decimal seja lido corretamente 
 SET other_sales = REPLACE(@other_sales, '.', '.'); -- Garante que o decimal seja lido corretamente 
 
+-- INJETANDO OS DADOS EM CADA TABELA - CONSOLE
+LOAD DATA LOCAL INFILE 'C:\\Users\\douglas.zanella\\Documents\\BIGDATA2026\\SenacAnaliseDados2026.2\\UC02\\Projeto_final_UC2\\Fonte_Dados_tratados\\df_console_tratado.csv' -- Ajuste o caminho no seu banco local
+INTO TABLE consoles
+FIELDS TERMINATED BY ',' 
+ENCLOSED BY '"'
+LINES TERMINATED BY '\r\n' -- Aqui: CR LF
+IGNORE 1 ROWS -- Pula o cabeçalho 'id_produto,nome...'
+(id_consoles, Console, Manufacturer, console_year, Generation);
+
+-- ALTER TABLE PARA INCLUIR CHAVES
+
+ALTER TABLE video_games_sales_2024 
+ADD CONSTRAINT pk_produtos 
+PRIMARY KEY (id_produto);
+
+-- EXCLUIR AS TABELAS:::
+DROP TABLE video_games_sales_2024;
 

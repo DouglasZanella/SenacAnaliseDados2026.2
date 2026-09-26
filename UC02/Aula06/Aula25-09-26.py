@@ -1,12 +1,14 @@
+#CONFIGURANDO CÓDIGO (ADAPTADO) PARA USAR NA AULA 
+
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 import seaborn as sns
 import mysql.connector
 
-precos_array = np.genfromtxt('../Aula03/vendas_produtos.csv', delimiter=',', skip_header=1, dtype=None, encoding='utf-8', usecols=3)
+## Continuando exatamente de onde paramos na aula passada (histograma), vamos calcular os quartis e verificar se a média está dentro da faixa interquartil (entre Q1 e Q3).
+precos_array = np.genfromtxt("C:\\Users\\douglas.zanella\\Documents\\BIGDATA2026\\SenacAnaliseDados2026.2\\UC02\\Aula06\\vendas_produtos.csv", delimiter=',', skip_header=1, dtype=None, encoding='utf-8', usecols=3)
 print(precos_array)
-print(type(precos_array))
 
 # Calcule a média:
 media = np.mean(precos_array)
@@ -21,28 +23,6 @@ print(f"Mediana dos preços: R$ {mediana:.2f}")
 # Calcule a distância entre a média e a mediana:
 distancia = (media - mediana) / mediana
 print(f"Distância entre a média e a mediana: {distancia * 100:.2f}%")
-
-if abs(distancia) <= 0.10:
-    print("A média tende a ser uma medida de tendência central confiável.")
-elif abs(distancia) < 0.25:
-    print("A média pode estar sofrendo uma influência moderada de valores extremos.")
-else:
-    print("A média tende a não ser uma medida de tendência central confiável.")
-
-# Verificando a direção da influência
-if media > mediana:
-    print("A influência é dos valores mais altos da distribuição.")
-elif media < mediana:
-    print("A influência é dos valores mais baixos da distribuição.")
-
-# Visualizando a distribuição dos preços
-import matplotlib.pyplot as plt  # Importando a biblioteca Matplotlib
-import seaborn as sns  # Importando a biblioteca Seaborn    
-
-sns.histplot(precos_array, kde=True) # kde=True adiciona a curva de densidade, traduzindo seria "Kernel Density Estimate"
-plt.title('Distribuição dos Preços dos Produtos')
-plt.show()  
-## Continuando exatamente de onde paramos na aula passada (histograma), vamos calcular os quartis e verificar se a média está dentro da faixa interquartil (entre Q1 e Q3).
 
 q1 = np.percentile(precos_array, 25)
 q2 = np.percentile(precos_array, 50)
@@ -64,7 +44,7 @@ plt.axvline(x=mediana, color='purple', linestyle='-', label=f'Mediana: R$ {media
 plt.legend()
 plt.show()
 
-###################################################
+# ###################################################
 
 # Calcular Q1 e Q3
 Q1 = np.percentile(precos_array, 25)
@@ -84,6 +64,8 @@ print(f"IQR: R$ {IQR:.2f}")
 print(f"Limite Superior (LS): R$ {limite_superior:.2f}")
 print(f"Limite Inferior (LI): R$ {limite_inferior:.2f}")
 
+
+####
 def obter_dados_do_banco(query):
     try:
         conexao = mysql.connector.connect(
@@ -104,10 +86,21 @@ def obter_dados_do_banco(query):
             cursor.close()
             conexao.close()
 
-query_produtos = "SELECT * FROM Produtos"
-dados_filtrados = obter_dados_do_banco(query_produtos) # <<<< Aqui você chama a função para obter os dados do banco e armazenar o que será convertido em um DataFrame do Pandas.
+# Usando a função
+query_produtos = "SELECT * FROM produtos WHERE preco > 100"
+dados_filtrados = obter_dados_do_banco(query_produtos)
 
-df_produtos = pd.DataFrame(dados_filtrados, columns=['id', 'nome_produto', 'preco', 'categoria']) # Consulta em SQL já convertida
+if dados_filtrados:
+    for produto in dados_filtrados:
+        print(produto)
+
+######################
+
+query_produtos = "SELECT * FROM produtos"
+df_produtos = pd.DataFrame(obter_dados_do_banco(query_produtos), columns=['id_produto', 'nome', 'categoria', 'preco', 'estoque'])
+
+####
+
 
 # Identificação de Outliers Superiores e Inferiores
 outliers_superiores = df_produtos[df_produtos['preco'] > limite_superior]

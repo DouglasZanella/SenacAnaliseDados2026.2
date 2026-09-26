@@ -1,20 +1,13 @@
 import pandas as pd
-
-df = pd.read_csv('vendas_produtos.csv')
-print(df.head())
-
-######################
-
 import mysql.connector
 
 # 1. Conectar ao banco de dados
 conexao = mysql.connector.connect(
-    host="localhost",
+    host="127.0.0.1",
     user="root",
     password="",
-    database="vendas_online2"
+    database="vendas_online"
 )
-
 
 # 2. Criar um objeto cursor para executar as queries
 cursor = conexao.cursor()
@@ -37,8 +30,6 @@ cursor.close()
 conexao.close()
 
 ######################
-
-import mysql.connector
 
 def obter_dados_do_banco(query):
     try:
@@ -67,3 +58,18 @@ dados_filtrados = obter_dados_do_banco(query_produtos)
 if dados_filtrados:
     for produto in dados_filtrados:
         print(produto)
+
+######################
+
+
+query_clientes = "SELECT * FROM clientes"
+df_clientes = pd.DataFrame(obter_dados_do_banco(query_clientes), columns=['id_cliente', 'nome', 'email'])
+print(df_clientes)
+
+df_pedidos = pd.read_csv('pedidos.csv')
+print(df_pedidos)
+
+# Relacionando os DataFrames pela coluna 'id_cliente'
+df_relacionado = pd.merge(df_clientes, df_pedidos, on='id_cliente', how='inner')
+
+print(df_relacionado)

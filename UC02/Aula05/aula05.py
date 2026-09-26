@@ -17,7 +17,7 @@ print(type(minha_serie))
 ####################################################
 
 # Extraindo a coluna 'preco' do arquivo vendas_produtos.csv com Numpy
-precos_array = np.genfromtxt('C:\\Users\\douglas.zanella\\Documents\\BIGDATA\\SenacAnaliseDados2026.2\\UC02\\Aula05\\vendas_produtos.csv', delimiter=',', skip_header=1, dtype=None, encoding='utf-8', usecols=3)
+precos_array = np.genfromtxt('../Aula03/vendas_produtos.csv', delimiter=',', skip_header=1, dtype=None, encoding='utf-8', usecols=3)
 print(precos_array)
 print(type(precos_array))
 

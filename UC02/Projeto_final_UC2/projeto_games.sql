@@ -22,6 +22,20 @@ CREATE TABLE video_games_sales_2024(
     release_date DATETIME,
     last_update DATETIME
 );
+
+CREATE TABLE secundary_vgsales_2024(
+	game_rank TINYINT,
+    game_name VARCHAR(100),
+    console VARCHAR (100),
+    game_year INT,
+    Genre VARCHAR (100),
+    Publisher VARCHAR (100),
+    NA_Sales DECIMAL (10,2),
+    EU_Sales DECIMAL (10,2),
+	JP_Sales DECIMAL (10,2),
+    Other_Sales DECIMAL (10,2),
+    Global_Sales DECIMAL(10, 2)
+);
     
 CREATE TABLE consoles(
 	id_consoles INT,
@@ -42,13 +56,25 @@ FIELDS TERMINATED BY ','
 ENCLOSED BY '"'
 LINES TERMINATED BY '\r\n' -- Aqui: CR LF
 IGNORE 1 ROWS -- Pula o cabeçalho 'id_produto,nome...'
-(game_name, console, genre, publisher, developer, @critic_score, @total_sales, @na_sales, @jp_sales, @pal_sales, @other_sales, release_date, last_update) -- Mapeia colunas
-SET critic_score = REPLACE(@critic_score, '.', '.'); -- Garante que o decimal seja lido corretamente 
-SET total_sales = REPLACE(@total_sales, '.', '.'); -- Garante que o decimal seja lido corretamente 
-SET na_sales = REPLACE(@na_sales, '.', '.'); -- Garante que o decimal seja lido corretamente 
-SET jp_sales = REPLACE(@jp_sales, '.', '.'); -- Garante que o decimal seja lido corretamente 
-SET pal_sales = REPLACE(@pal_sales, '.', '.'); -- Garante que o decimal seja lido corretamente 
-SET other_sales = REPLACE(@other_sales, '.', '.'); -- Garante que o decimal seja lido corretamente 
+(game_name, console, genre, publisher, developer, @critic_score, @total_sales, @na_sales, @jp_sales, @pal_sales, @other_sales, release_date, last_update); -- Mapeia colunas
+-- (game_name, console, genre, publisher, developer, @critic_score, @total_sales, @na_sales, @jp_sales, @pal_sales, @other_sales, release_date, last_update) -- Mapeia colunas
+-- SET critic_score = REPLACE(@critic_score, '.', '.'); -- Garante que o decimal seja lido corretamente 
+-- SET total_sales = REPLACE(@total_sales, '.', '.'); -- Garante que o decimal seja lido corretamente 
+-- SET na_sales = REPLACE(@na_sales, '.', '.'); -- Garante que o decimal seja lido corretamente 
+-- SET jp_sales = REPLACE(@jp_sales, '.', '.'); -- Garante que o decimal seja lido corretamente 
+-- SET pal_sales = REPLACE(@pal_sales, '.', '.'); -- Garante que o decimal seja lido corretamente 
+-- SET other_sales = REPLACE(@other_sales, '.', '.'); -- Garante que o decimal seja lido corretamente 
+-- ---------------------------------------------------------------------------------------------------------------------------
+-- INJETANDO OS DADOS EM CADA TABELA - BASE SECUNDÁRIA DE VENDAS DOS JOGOS:
+LOAD DATA LOCAL INFILE 'C:\\Users\\douglas.zanella\\Documents\\BIGDATA2026\\SenacAnaliseDados2026.2\\UC02\\Projeto_final_UC2\\Fonte_Dados_tratados\\df_secundary_vgsales_tratado.csv' -- Ajuste o caminho no seu banco local
+INTO TABLE secundary_vgsales_2024
+FIELDS TERMINATED BY ',' 
+ENCLOSED BY '"'
+LINES TERMINATED BY '\r\n' -- Aqui: CR LF
+IGNORE 1 ROWS -- Pula o cabeçalho 'id_produto,nome...'
+(game_rank, game_name, console, game_year, Genre, Publisher, NA_Sales, EU_Sales, JP_Sales, Other_Sales, Global_Sales); -- Mapeia colunas; -- Mapeia colunas
+
+-- ---------------------------------------------------------------------------------------------------------------------------
 
 -- INJETANDO OS DADOS EM CADA TABELA - CONSOLE
 LOAD DATA LOCAL INFILE 'C:\\Users\\douglas.zanella\\Documents\\BIGDATA2026\\SenacAnaliseDados2026.2\\UC02\\Projeto_final_UC2\\Fonte_Dados_tratados\\df_console_tratado.csv' -- Ajuste o caminho no seu banco local

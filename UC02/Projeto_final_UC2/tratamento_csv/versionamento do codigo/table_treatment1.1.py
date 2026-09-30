@@ -7,7 +7,7 @@ import numpy as np
 
 # 1 -CSV PRINCIPAL :
 df_vgsales2024 = pd.read_csv("C:\\Users\\douglas.zanella\\Documents\\BIGDATA2026\\SenacAnaliseDados2026.2\\UC02\\Projeto_final_UC2\\Fonte_Dados_Original\\vgchartz-2024.csv")
-df_vgsales2024_remove_imgcolumns = df_vgsales2024.drop(df_vgsales2024.columns[0], axis=1) #Remove a primeira coluna do CSV referente as imagens
+df_vgsales2024_remove_imgcolumns = df_vendas_2024_tratado = df_vendas_2024_tratado.drop(columns=["img"]) #Remove a primeira coluna do CSV referente as imagens
 df_vgasales2024_renametitle = df_vgsales2024_remove_imgcolumns.rename(columns={'title':'game_name'}) #renomeia a coluna de titulo para nome
 
 print(df_vgasales2024_renametitle)

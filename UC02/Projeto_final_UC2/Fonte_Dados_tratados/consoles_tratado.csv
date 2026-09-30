@@ -1,4 +1,4 @@
-id_console,console,Manufacturer,console_year,Generation
+id_console,console_name,manufacturer,console_year,generation
 1,Magnavox Odyssey,Magnavox,1972,First
 2,Epoch TV Tennis,Epoch,1975,First
 3,Home Pong,Atari,1975,First

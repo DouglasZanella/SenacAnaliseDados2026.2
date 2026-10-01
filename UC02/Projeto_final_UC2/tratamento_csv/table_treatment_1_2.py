@@ -19,9 +19,8 @@ import pandas as pd
 # ============================================================
 
 df_primarysales_2024_original = pd.read_csv(
-    r"C:\Users\dsz_d\Documents\Estudos\SENAC\BIGDATA"
-    r"\SenacAnaliseDados2026.2\UC02\Projeto_final_UC2"
-    r"\Fonte_Dados_Original\vgchartz-2024.csv"
+   r"C:\Users\douglas.zanella\Documents\BIGDATA2026\SenacAnaliseDados2026.2"
+   r"\UC02\Projeto_final_UC2\Fonte_Dados_Original\vgchartz-2024.csv"
 )
 '''
 OBSERVAÇÃO:
@@ -54,6 +53,9 @@ df_primarysales_2024_tratado = (
     )
 )
 
+#Renomeia os dados da coluna inteiro para padronizar: 
+df_primarysales_2024_tratado["genre"] = df_primarysales_2024_tratado["genre"].replace('Role-Playing', 'RPG')
+
 print("\nCSV PRINCIPAL DE VENDAS 2024:")
 print(df_primarysales_2024_tratado.head())
 
@@ -68,9 +70,8 @@ print("\n", "=" * 80)
 # ============================================================
 
 df_secundarysales_original = pd.read_csv(
-    r"C:\Users\dsz_d\Documents\Estudos\SENAC\BIGDATA"
-    r"\SenacAnaliseDados2026.2\UC02\Projeto_final_UC2"
-    r"\Fonte_Dados_Original\video_games_sales.csv"
+    r"C:\Users\douglas.zanella\Documents\BIGDATA2026"
+    r"\SenacAnaliseDados2026.2\UC02\Projeto_final_UC2\Fonte_Dados_Original\video_games_sales.csv"
 )
 
 # Cria uma cópia para preservar o DataFrame original
@@ -96,6 +97,10 @@ df_secundarysales_tratado = (
     )
 )
 
+#Renomeia os dados da coluna inteiro para padronizar: 
+df_secundarysales_tratado["genre"] = df_secundarysales_tratado["genre"].replace('Role-Playing', 'RPG')
+
+
 print("\nCSV SECUNDÁRIO DE VENDAS:")
 print(df_secundarysales_tratado.head())
 
@@ -110,9 +115,8 @@ print("\n", "=" * 80)
 # ============================================================
 
 df_consoles_original = pd.read_csv(
-    r"C:\Users\dsz_d\Documents\Estudos\SENAC\BIGDATA"
-    r"\SenacAnaliseDados2026.2\UC02\Projeto_final_UC2"
-    r"\Fonte_Dados_Original\videogameconsoles.csv"
+    r"C:\Users\douglas.zanella\Documents\BIGDATA2026\SenacAnaliseDados2026.2"
+    r"\UC02\Projeto_final_UC2\Fonte_Dados_Original\videogameconsoles.csv"
 )
 
 # Copia o original
@@ -147,31 +151,28 @@ print("\n", "=" * 80)
 # - RETIRE OS COMENTÁRIOS NO 1º USO, DEPOIS PODE COMENTAR PARA NÃO FICAR USANDO 
 # ============================================================
 
-# df_primarysales_2024_tratado.to_csv(
-#     r"C:\Users\dsz_d\Documents\Estudos\SENAC\BIGDATA"
-#     r"\SenacAnaliseDados2026.2\UC02\Projeto_final_UC2"
-#     r"\Fonte_Dados_tratados\video_games_sales_2024_tratado.csv",
-#     index=False,
-#     sep=",",
-#     encoding="utf-8"
-# )
+df_primarysales_2024_tratado.to_csv(
+    r"C:\Users\douglas.zanella\Documents\BIGDATA2026\SenacAnaliseDados2026.2"
+    r"\UC02\Projeto_final_UC2\Fonte_Dados_tratados\video_games_sales_2024_tratado.csv",
+    index=False,
+    sep=",",
+    encoding="utf-8"
+)
 
-# df_secundarysales_tratado.to_csv(
-#     r"C:\Users\dsz_d\Documents\Estudos\SENAC\BIGDATA"
-#     r"\SenacAnaliseDados2026.2\UC02\Projeto_final_UC2"
-#     r"\Fonte_Dados_tratados\video_games_sales_secundaria_tratado.csv",
-#     index=False,
-#     sep=",",
-#     encoding="utf-8"
-# )
+df_secundarysales_tratado.to_csv(
+    r"C:\Users\douglas.zanella\Documents\BIGDATA2026\SenacAnaliseDados2026.2"
+    r"\UC02\Projeto_final_UC2\Fonte_Dados_tratados\video_games_sales_secundaria_tratado.csv",
+    index=False,
+    sep=",",
+    encoding="utf-8"
+)
 
-# df_consoles_tratado.to_csv(
-#     r"C:\Users\dsz_d\Documents\Estudos\SENAC\BIGDATA"
-#     r"\SenacAnaliseDados2026.2\UC02\Projeto_final_UC2"
-#     r"\Fonte_Dados_tratados\consoles_tratado.csv",
-#     index=False,
-#     sep=",",
-#     encoding="utf-8"
-# )
+df_consoles_tratado.to_csv(
+    r"C:\Users\douglas.zanella\Documents\BIGDATA2026\SenacAnaliseDados2026.2"
+    r"\UC02\Projeto_final_UC2\Fonte_Dados_tratados\consoles_tratado.csv",
+    index=False,
+    sep=",",
+    encoding="utf-8"
+)
 
 print("\nSalvamento dos arquivos CSV concluído com sucesso!")

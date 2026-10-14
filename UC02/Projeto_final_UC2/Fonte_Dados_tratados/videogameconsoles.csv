@@ -1,0 +1,40 @@
+id_console,console_code,console_name,manufacturer,generation,time_period,console_year,game_media,original_price,total_systems_sold
+1,2600,Atari 2600,Atari,Second,1976-1985,1977,Game cartridges,199.0,30000000
+2,3DS,Nintendo 3DS,Nintendo,Eighth,2011-Present,2011,Game cartridges. Digital Distribution,249.99,75940000
+3,7800,Atari 7800,Atari,Third,1983-1993,1986,Game cartridges,140.0,100000
+4,CHF,Fairchild Channel F,Fairchild,Second,1976-1984,1976,Game cartridges,169.95,250000
+5,CV,ColecoVision,Coleco,Second,1976-1988,1982,Game cartridges,199.0,2000000
+6,DC,Sega Dreamcast,Sega,Sixth,1998-2006,1998,Optical media,199.99,9130000
+7,DS,Nintendo DS,Nintendo,Seventh,2004-2016,2004,"Game Cartridges, Digital distribution",149.99,154002000
+8,GB,Game Boy,Nintendo,Fourth,1987-2001,1989,Game cartridges,89.95,118690000
+9,GBA,Game Boy Advance,Nintendo,Sixth,1998-2009,2001,Game Cartridges,99.99,81510000
+10,GBC,Game Boy Color,Nintendo,Fifth,1993-2003,1998,Game Cartridges,69.99,118690000
+11,GC,Nintendo GameCube,Nintendo,Sixth,1998-2008,2001,Optical media,199.99,21740000
+12,GEN,Sega Genesis,Sega,Fourth,1987-1997,1988,Game cartridges,189.99,40000000
+13,GG,Game Gear,Sega,Fourth,1987-2000,1990,Game cartridges,149.99,15000000
+14,INT,Mattel Intellivision,Mattel,Second,1976-1986,1980,Game cartridges,299.0,3000000
+15,MS,Sega Master System,Sega,Third,1983-1992,1986,Game cartridges,199.99,20190000
+16,N64,Nintendo 64,Nintendo,Fifth,1993-2004,1996,Game Cartridges,199.99,32930000
+17,NES,Nintendo Entertainment System,Nintendo,Third,1983-1991,1985,Game cartridges,180.0,42560000
+18,NG,Neo Geo,SNK,Fourth,1987-1998,1991,Game cartridges,650.0,410000
+19,NS,Nintendo Switch,Nintendo,Eighth,2011-Present,2017,Game cartridges. Digital Distribution,299.99,103540000
+20,ODY,Magnavox Odyssey,Magnavox,First,1972-1978,1972,Dedicated consoles,99.0,350000
+21,ODY2,Magnavox Odyssey 2,Magnavox,Second,1976-1987,1978,Game cartridges,199.0,2000000
+22,PONG,Home Pong,Atari,First,1972-1979,1977,Dedicated consoles,98.95,150000
+23,PS,Sony PlayStation,Sony,Fifth,1993-2002,1994,Optical Meda,299.99,102000000
+24,PS2,Sony PlayStation 2,Sony,Sixth,1998-2007,2000,Optical media,299.99,155000000
+25,PS3,Sony PlayStation 3,Sony,Seventh,2004-2015,2006,"Optical media, digital distribution",599.99,87400000
+26,PS4,Sony PlayStation 4,Sony,Eighth,2011-Present,2013,"Optical media, digital distribution",399.99,116850000
+27,PS5,Sony PlayStation 5 (Digital Edition),Sony,Ninth,2020–present,2020,"Optical media, digital distribution",399.99,18500000
+28,PSP,Playstation Portable,Sony,Seventh,2004-2017,2004,"Optical media, digital distribution",249.99,81009000
+29,PSV,Playstation Vita,Sony,Eighth,2011-Present,2011,"Optical media, digital distribution",299.99,16210000
+30,SAT,Sega Saturn,Sega,Fifth,1993-2001,1994,Optical media,399.99,9400000
+31,SNES,Super Nintendo Entertainment System,Nintendo,Fourth,1987-1999,1990,Game cartridges,199.99,49100000
+32,TELSTAR,Coleco Telstar series,Coleco,First,1972-1980,1976,Dedicated consoles,50.0,1000000
+33,TG16,TurboGrafx-16,NEC,Fourth,1987-1996,1987,Game cartridges,199.0,10500000
+34,WII,Nintendo Wii,Nintendo,Seventh,2004-2018,2006,"Optical media, digital distribution",249.99,101630000
+35,WIIU,Nintendo Wii U,Nintendo,Eighth,2011-Present,2012,"Optical media, digital distribution",299.99,13560000
+36,X360,Microsoft Xbox 360,Microsoft,Seventh,2004-2014,2005,"Optical media, digital distribution",399.99,84000000
+37,XB,Microsoft Xbox,Microsoft,Sixth,1998-2010,2001,Optical media,299.99,24000000
+38,XONE,Microsoft Xbox One,Microsoft,Eighth,2011-Present,2013,"Optical media, digital distribution",499.99,50550000
+39,XS,Microsoft Xbox Series X,Microsoft,Ninth,2020–present,2020,"Optical media, digital distribution",299.99,12390000

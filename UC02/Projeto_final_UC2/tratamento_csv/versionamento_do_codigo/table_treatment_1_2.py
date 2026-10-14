@@ -19,8 +19,8 @@ import pandas as pd
 # ============================================================
 
 df_primarysales_2024_original = pd.read_csv(
-   r"C:\Users\douglas.zanella\Documents\BIGDATA2026\SenacAnaliseDados2026.2"
-   r"\UC02\Projeto_final_UC2\Fonte_Dados_Original\vgchartz-2024.csv"
+   r"C:\Users\dsz_d\Documents\Estudos\SENAC\BIGDATA\SenacAnaliseDados2026.2\UC02"
+   r"\Projeto_final_UC2\Projeto_final_UC2\Fonte_Dados_Original"
 )
 '''
 OBSERVAÇÃO:
@@ -145,8 +145,56 @@ print(df_consoles_tratado.shape)
 print("\n", "=" * 80)
 
 
+
 # ============================================================
-# 4. SALVAMENTO DOS ARQUIVOS TRATADOS
+# 4. VERIFICAÇÃO DE NOMES REPETIDOS NAS TABLEAS DE VENDAS 
+# ============================================================
+
+#PADRONIZAÇÃO DE NOMES PARA VERIFICAÇÃO DE DUPLICATAS:
+#TABELA PRINCIPAL
+df_primarysales_2024_tratado["game_name_key"] = (
+    df_primarysales_2024_tratado["game_name"]
+    .str.strip() #RETIRA OS ESPAÇOS VAZIOS
+    .str.lower() #TRANSFORMA EM MINÚSCULAS
+)
+
+df_primarysales_2024_tratado["console_code_key"] = (
+    df_primarysales_2024_tratado["console_code"]
+    .str.strip()
+    .str.upper()
+)
+
+#TABELA SECUNDÁRIA
+df_secundarysales_tratado["game_name_key"] = (
+    df_secundarysales_tratado["game_name"]
+    .str.strip()
+    .str.lower()
+)
+
+df_secundarysales_tratado["console_code_key"] = (
+    df_secundarysales_tratado["console_code"]
+    .str.strip()
+    .str.upper()
+)
+
+
+#================================
+duplicados_principal = df_primarysales_2024_tratado.duplicated( #COMANDO QUE VERIFICA DUPLICATAAS EM SÉRIES DO PANDAS
+    subset=["game_name", "console_code"] #SUBSET SERVE PARA "DEFINIR" OS TERMOS DE REFERÊNCIA QUE O CÓDIGO UTILIZARÁ E RETORNA VALORES BOOLEANOS
+).sum() #SOMA O TOTAL DE BOOLEANOS "TRUE" QUE A FUNÇÃO DETECTAR (CONTABILIZANDO ASSIM A QUANTIDADE DE DUPLICATAS)
+
+duplicados_secundario = df_secundarysales_tratado.duplicated(
+    subset=["game_name", "console_code"]
+).sum()
+
+print("\nDuplicados na base principal:")
+print(duplicados_principal)
+
+print("\nDuplicados na base secundária:")
+print(duplicados_secundario)
+
+# ============================================================
+# 5. SALVAMENTO DOS ARQUIVOS TRATADOS
 # ============================================================
 # - RETIRE OS COMENTÁRIOS NO 1º USO, DEPOIS PODE COMENTAR PARA NÃO FICAR USANDO 
 # ============================================================
@@ -176,3 +224,4 @@ df_consoles_tratado.to_csv(
 )
 
 print("\nSalvamento dos arquivos CSV concluído com sucesso!")
+

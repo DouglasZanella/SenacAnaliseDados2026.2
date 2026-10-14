@@ -6,112 +6,173 @@ CREATE DATABASE projeto_games;
 -- "Ativando o Bando de dados criado" 
 USE projeto_games;
 
--- CRIANDO A TABELA PARA INJETAR OS DADOS:
-CREATE TABLE video_games_sales_2024(
-	game_name VARCHAR(100),
-    console_code VARCHAR(100),
-    genre VARCHAR(50),
-    publisher VARCHAR(100),
-    developer VARCHAR(100),
-    critic_score DECIMAL(10,2),
-    total_sales DECIMAL(10,2),
-    na_sales DECIMAL(10,2),
-    jp_sales DECIMAL(10,2),
-	pal_sales DECIMAL(10,2),
-    other_sales DECIMAL(10, 2),
-    release_date DATETIME,
-    last_update DATETIME
+-- -------------------------------------------- / CRIA A TABELA VENDAS CONSOLE / ----------------------------------------------
+CREATE TABLE consoles (
+    id_console INT NOT NULL,
+    console_code VARCHAR(20) NOT NULL,
+    console_name VARCHAR(150) NOT NULL,
+    manufacturer VARCHAR(100),
+    generation VARCHAR(30),
+    time_period VARCHAR(30),
+    console_year INT,
+    game_media VARCHAR(255),
+    original_price DECIMAL(10, 2),
+    total_systems_sold BIGINT,
+    CONSTRAINT pk_consoles
+        PRIMARY KEY (id_console),
+    CONSTRAINT uq_consoles_console_code
+        UNIQUE (console_code)
 );
 
-CREATE TABLE secundary_vgsales_2024(
-	game_rank TINYINT,
-    game_name VARCHAR(100),
-    console_code VARCHAR (100),
-    game_year INT,
-    genre VARCHAR (100),
-    publisher VARCHAR (100),
-    na_sales DECIMAL (10,2),
-    eu_sales DECIMAL (10,2),
-	jp_sales DECIMAL (10,2),
-    other_sales DECIMAL (10,2),
-    global_sales DECIMAL(10, 2)
+-- -------------------------------------------- /CRIA A TABELA VENDAS GERAIS / ----------------------------------------------
+
+CREATE TABLE tabela_geral_vendas_2024 (
+    id_game INT NOT NULL,
+    game_name VARCHAR(255) NOT NULL,
+    console_code VARCHAR(20),
+    genre VARCHAR(100),
+    publisher VARCHAR(255),
+    developer VARCHAR(255),
+    critic_score DECIMAL(4,2),
+    total_sales DECIMAL(12,4),
+    na_sales DECIMAL(12,4),
+    jp_sales DECIMAL(12,4),
+    pal_sales DECIMAL(12,4),
+    other_sales DECIMAL(12,4),
+    game_release_date DATE,
+    last_update_date DATE,
+
+    CONSTRAINT pk_tabela_geral_vendas
+        PRIMARY KEY (id_game)
 );
-    
-CREATE TABLE consoles(
-	id_consoles INT,
-    console_name VARCHAR(100),
-    manufacturer VARCHAR(100),
-    console_year VARCHAR(10),
-    generation VARCHAR(10)
-);
+
+-- -------------------------------------------- / / -------------------------------------------------------------------------------
 
 SET GLOBAL local_infile = 1; -- marcação de aceite para arquivos locais (passo extra 01 junto ao load data)
-
 -- 'OPT_LOCAL_INFILE=1' -- (passo extra 02 junto ao load data) inserir na sua conexão local (edit da conexão >> Advanced >> Others)
 
--- INJETANDO OS DADOS EM CADA TABELA - BASE DE VENDAS DOS JOGOS:
-LOAD DATA LOCAL INFILE 'C:\\Users\\douglas.zanella\\Documents\\BIGDATA2026\\SenacAnaliseDados2026.2\\UC02\\Projeto_final_UC2\\Fonte_Dados_tratados\\video_games_sales_2024_tratado.csv' -- Ajuste o caminho no seu banco local
-INTO TABLE video_games_sales_2024
+-- -------------------------------------------- / INJETA DADOS NA TABELA VENDAS GERAIS / ----------------------------------------------
+
+-- Versão CURSO:'C:\\Users\\douglas.zanella\\Documents\\BIGDATA2026\\SenacAnaliseDados2026.2\\UC02\\Projeto_final_UC2\\Fonte_Dados_tratados\\video_games_sales_2024_tratado.csv'
+-- VERSÃO CASA: "C:\\Users\\dsz_d\\Documents\\Estudos\\SENAC\\BIGDATA\\SenacAnaliseDados2026.2\\UC02\\Projeto_final_UC2\\Fonte_Dados_tratados\\tabela_geral_vendas_2024.csv"
+LOAD DATA LOCAL INFILE "C:\\Users\\dsz_d\\Documents\\Estudos\\SENAC\\BIGDATA\\SenacAnaliseDados2026.2\\UC02\\Projeto_final_UC2\\Fonte_Dados_tratados\\tabela_geral_vendas_2024.csv"
+INTO TABLE tabela_geral_vendas_2024
 FIELDS TERMINATED BY ',' 
 ENCLOSED BY '"'
 LINES TERMINATED BY '\r\n' -- Aqui: CR LF
 IGNORE 1 ROWS -- Pula o cabeçalho 'id_produto,nome...'
-(game_name, console_code, genre, publisher, developer, critic_score, total_sales, na_sales, jp_sales, pal_sales, other_sales, release_date, last_update); -- Mapeia colunas
--- (game_name, console, genre, publisher, developer, @critic_score, @total_sales, @na_sales, @jp_sales, @pal_sales, @other_sales, release_date, last_update) -- Mapeia colunas
--- SET critic_score = REPLACE(@critic_score, '.', '.'); -- Garante que o decimal seja lido corretamente 
--- SET total_sales = REPLACE(@total_sales, '.', '.'); -- Garante que o decimal seja lido corretamente 
--- SET na_sales = REPLACE(@na_sales, '.', '.'); -- Garante que o decimal seja lido corretamente 
--- SET jp_sales = REPLACE(@jp_sales, '.', '.'); -- Garante que o decimal seja lido corretamente 
--- SET pal_sales = REPLACE(@pal_sales, '.', '.'); -- Garante que o decimal seja lido corretamente 
--- SET other_sales = REPLACE(@other_sales, '.', '.'); -- Garante que o decimal seja lido corretamente 
--- ---------------------------------------------------------------------------------------------------------------------------
--- INJETANDO OS DADOS EM CADA TABELA - BASE SECUNDÁRIA DE VENDAS DOS JOGOS:
-LOAD DATA LOCAL INFILE 'C:\\Users\\douglas.zanella\\Documents\\BIGDATA2026\\SenacAnaliseDados2026.2\\UC02\\Projeto_final_UC2\\Fonte_Dados_tratados\\video_games_sales_secundaria_tratado.csv' -- Ajuste o caminho no seu banco local
-INTO TABLE secundary_vgsales_2024
-FIELDS TERMINATED BY ',' 
-ENCLOSED BY '"'
-LINES TERMINATED BY '\r\n' -- Aqui: CR LF
-IGNORE 1 ROWS -- Pula o cabeçalho 'id_produto,nome...'
-(game_rank, game_name, console_code, game_year, genre, publisher, na_sales, eu_sales, jp_sales, other_sales, global_sales); -- Mapeia colunas; -- Mapeia colunas
+(id_game, game_name, console_code, genre, publisher, developer, @critic_score, @total_sales, @na_sales, @jp_sales, @pal_sales, @other_sales, @game_release_date, @last_update_date)
+SET
+    critic_score = NULLIF(@critic_score, ''),
+    total_sales = NULLIF(@total_sales, ''),
+    na_sales = NULLIF(@na_sales, ''),
+    jp_sales = NULLIF(@jp_sales, ''),
+    pal_sales = NULLIF(@pal_sales, ''),
+    other_sales = NULLIF(@other_sales, ''),
+    game_release_date = NULLIF(
+        LEFT(@game_release_date, 10),
+        ''
+    ),
+    last_update_date = NULLIF(
+        LEFT(@last_update_date, 10),
+        ''
+    );
+    
+-- -------------------------------------------- / INJETA DADOS NA TABELA CONSOLE / ----------------------------------------------
 
--- ---------------------------------------------------------------------------------------------------------------------------
-
--- INJETANDO OS DADOS EM CADA TABELA - CONSOLE
-LOAD DATA LOCAL INFILE 'C:\\Users\\douglas.zanella\\Documents\\BIGDATA2026\\SenacAnaliseDados2026.2\\UC02\\Projeto_final_UC2\\Fonte_Dados_tratados\\consoles_tratado.csv' -- Ajuste o caminho no seu banco local
+LOAD DATA LOCAL INFILE "C:/Users/dsz_d/Documents/Estudos/SENAC/BIGDATA/SenacAnaliseDados2026.2/UC02/Projeto_final_UC2/Fonte_Dados_tratados/videogameconsoles.csv"
 INTO TABLE consoles
-FIELDS TERMINATED BY ',' 
+CHARACTER SET utf8mb4
+FIELDS TERMINATED BY ','
 ENCLOSED BY '"'
-LINES TERMINATED BY '\r\n' -- Aqui: CR LF
-IGNORE 1 ROWS -- Pula o cabeçalho 'id_produto,nome...'
-(id_consoles,console_name, manufacturer, console_year, generation);
+LINES TERMINATED BY '\n'
+IGNORE 1 ROWS
+(id_console, console_code, console_name, manufacturer, generation, time_period, @console_year, game_media, @original_price, @total_systems_sold )
+SET
+    console_year = NULLIF(
+            TRIM(@console_year),
+            ''
+),
+    original_price = NULLIF(
+            TRIM(@original_price),
+            '' 
+),
+    total_systems_sold = NULLIF(
+            TRIM( REPLACE( @total_systems_sold, '\r', '') 
+            ),
+		''
+);
+-- -------------------------------------------- / VERIFICAR QUANTIDADES / ---------------------------------------------------------
 
-ALTER TABLE video_games_sales_2024 
-DROP COLUMN pk_id_game;
+-- ================= QUANTIDADE CONSOLES
+SELECT
+    COUNT(*) AS quantidade_consoles
+FROM consoles;
 
--- ALTER TABLE PARA INCLUIR COLUNAS NECESSÁRIAS
-ALTER TABLE video_games_sales_2024 
-ADD COLUMN pk_id_game INT NOT NULL AUTO_INCREMENT; 
+-- ================= QUANTIDADE JOGOS
+SELECT
+    COUNT(*) AS quantidade_jogos
+FROM tabela_geral_vendas_2024;
+
+-- -------------------------------------------- / VISUALIZAÇÕES / ---------------------------------------------------------
+SELECT *
+FROM consoles
+LIMIT 10;
+
+SELECT *
+FROM tabela_geral_vendas_2024
+LIMIT 10;
+
+-- -------------------------------------------- / CONFERÊNCIA DE DUPLICATAS / ---------------------------------------------------------
+SELECT
+    console_code,
+    COUNT(*) AS quantidade
+
+FROM consoles
+
+GROUP BY console_code
+
+HAVING COUNT(*) > 1;
+
+-- -------------------------------------------- / TESTE DE RELACIONAMENTO / ---------------------------------------------------------
+SELECT
+    vendas.id_game,
+    vendas.game_name,
+    vendas.console_code,
+    vendas.genre,
+    vendas.total_sales,
+
+    consoles.console_name,
+    consoles.manufacturer,
+    consoles.generation
+
+FROM tabela_geral_vendas_2024 AS vendas
+
+LEFT JOIN consoles
+    ON vendas.console_code = consoles.console_code
+
+LIMIT 100;
+
+-- CONSULTA DE DE DADOS INEXISTENTES ENTRE AS TABELAS
+
+SELECT DISTINCT
+    vendas.console_code
+
+FROM tabela_geral_vendas_2024 AS vendas
+
+LEFT JOIN consoles
+    ON vendas.console_code = consoles.console_code
+
+WHERE consoles.console_code IS NULL
+
+ORDER BY vendas.console_code;
+
+-- -------------------------------------------- / / -------------------------------------------------------------------------------
 
 
--- ALTER TABLE PARA INCLUIR CHAVES
-ALTER TABLE video_games_sales_2024 	
-ADD CONSTRAINT PK_video_games_sales_2024
-PRIMARY KEY (id_games); 
-
-ALTER TABLE video_games_sales_2024 
-ADD CONSTRAINT fk_video_games_sales_2024_consoles 
-FOREIGN KEY (id_consoles) REFERENCES consoles(cid_consoles); 
-
-ALTER TABLE secundary_vgsales_2024 
-ADD CONSTRAINT pk_secundary_vgsales_2024 
-PRIMARY KEY (id_games);
-
-ALTER TABLE consoles 
-ADD CONSTRAINT pk_consoles 
-PRIMARY KEY (id_consoles);
-
--- =========================================================
--- EXCLUIR AS TABELAS:::
-DROP TABLE video_games_sales_2024;
-DROP TABLE secundary_vgsales_2024;
+-- EXCLUIR AS TABELAS 
+DROP TABLE tabela_geral_vendas_2024;
 DROP TABLE consoles;
+
+-- VERIFICA CONEXÃO 
+SHOW GLOBAL VARIABLES LIKE 'local_infile';

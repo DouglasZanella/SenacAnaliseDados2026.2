@@ -55,7 +55,7 @@ SET GLOBAL local_infile = 1; -- marcação de aceite para arquivos locais (passo
 
 -- Versão CURSO:'C:\\Users\\douglas.zanella\\Documents\\BIGDATA2026\\SenacAnaliseDados2026.2\\UC02\\Projeto_final_UC2\\Fonte_Dados_tratados\\video_games_sales_2024_tratado.csv'
 -- VERSÃO CASA: "C:\\Users\\dsz_d\\Documents\\Estudos\\SENAC\\BIGDATA\\SenacAnaliseDados2026.2\\UC02\\Projeto_final_UC2\\Fonte_Dados_tratados\\tabela_geral_vendas_2024.csv"
-LOAD DATA LOCAL INFILE "C:\\Users\\dsz_d\\Documents\\Estudos\\SENAC\\BIGDATA\\SenacAnaliseDados2026.2\\UC02\\Projeto_final_UC2\\Fonte_Dados_tratados\\tabela_geral_vendas_2024.csv"
+LOAD DATA LOCAL INFILE "C:\\Users\\douglas.zanella\\Documents\\BIGDATA2026\\SenacAnaliseDados2026.2\\UC02\\Projeto_final_UC2\\Fonte_Dados_tratados\\vendas_games2024_tratados.csv"
 INTO TABLE tabela_geral_vendas_2024
 FIELDS TERMINATED BY ',' 
 ENCLOSED BY '"'
@@ -80,7 +80,7 @@ SET
     
 -- -------------------------------------------- / INJETA DADOS NA TABELA CONSOLE / ----------------------------------------------
 
-LOAD DATA LOCAL INFILE "C:/Users/dsz_d/Documents/Estudos/SENAC/BIGDATA/SenacAnaliseDados2026.2/UC02/Projeto_final_UC2/Fonte_Dados_tratados/videogameconsoles.csv"
+LOAD DATA LOCAL INFILE "C:\\Users\\douglas.zanella\\Documents\\BIGDATA2026\\SenacAnaliseDados2026.2\\UC02\\Projeto_final_UC2\\Fonte_Dados_tratados\\consolestratados.csv"
 INTO TABLE consoles
 CHARACTER SET utf8mb4
 FIELDS TERMINATED BY ','
